@@ -1,0 +1,102 @@
+<div class="min-h-screen bg-gray-50/50">
+  <app-page-header
+    [title]="'profilePage.pageTitle' | translate"
+    [description]="'profilePage.pageDescription' | translate"
+    [breadcrumbs]="[{ label: ('profilePage.breadcrumb' | translate) }]"
+    [iconClass]="'fa-solid fa-user'"
+  >
+  </app-page-header>
+
+  <div class="container px-4 py-8">
+    <div class="flex flex-col lg:flex-row gap-6 lg:gap-8">
+      <aside class="w-full lg:w-72 shrink-0">
+        <nav class="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
+          <div class="p-4 border-b border-gray-100">
+            <h2 class="font-bold text-gray-900">{{ 'profilePage.sidebarTitle' | translate }}</h2>
+          </div>
+
+          <ul class="p-2 space-y-1">
+            <li>
+              <a
+                routerLink="addresses"
+                #rlaAddresses="routerLinkActive"
+                routerLinkActive
+                class="flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200 group text-gray-600"
+                [class]="{
+                  'bg-primary-50': rlaAddresses.isActive,
+                  'text-primary-700': rlaAddresses.isActive,
+                  'hover:bg-gray-50': !rlaAddresses.isActive,
+                  'hover:text-gray-900': !rlaAddresses.isActive,
+                }"
+              >
+                <div
+                  class="w-9 h-9 rounded-lg flex items-center justify-center transition-colors"
+                  [class]="{
+                    'bg-primary-500': rlaAddresses.isActive,
+                    'text-white': rlaAddresses.isActive,
+                    'bg-gray-100': !rlaAddresses.isActive,
+                    'text-gray-500': !rlaAddresses.isActive,
+                    'group-hover:bg-gray-200': !rlaAddresses.isActive,
+                  }"
+                >
+                  <i class="fa-solid fa-location-dot text-sm"></i>
+                </div>
+
+                <span class="font-medium flex-1">{{ 'profilePage.myAddresses' | translate }}</span>
+
+                <i
+                  class="fa-solid fa-chevron-right text-sm transition-transform rtl:rotate-180"
+                  [class]="{
+                    'text-primary-500': rlaAddresses.isActive,
+                    'text-gray-400': !rlaAddresses.isActive,
+                  }"
+                ></i>
+              </a>
+            </li>
+
+            <li>
+              <a
+                routerLink="settings"
+                #rlaSettings="routerLinkActive"
+                routerLinkActive
+                class="flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200 group text-gray-600"
+                [class]="{
+                  'bg-primary-50': rlaSettings.isActive,
+                  'text-primary-700': rlaSettings.isActive,
+                  'hover:bg-gray-50': !rlaSettings.isActive,
+                  'hover:text-gray-900': !rlaSettings.isActive,
+                }"
+              >
+                <div
+                  class="w-9 h-9 rounded-lg flex items-center justify-center transition-colors"
+                  [class]="{
+                    'bg-primary-500': rlaSettings.isActive,
+                    'text-white': rlaSettings.isActive,
+                    'bg-gray-100': !rlaSettings.isActive,
+                    'text-gray-500': !rlaSettings.isActive,
+                    'group-hover:bg-gray-200': !rlaSettings.isActive,
+                  }"
+                >
+                  <i class="fa-solid fa-gear text-sm"></i>
+                </div>
+
+                <span class="font-medium flex-1">{{ 'profilePage.settings' | translate }}</span>
+
+                <i
+                  class="fa-solid fa-chevron-right text-sm transition-transform rtl:rotate-180"
+                  [class]="{
+                    'text-primary-500': rlaSettings.isActive,
+                    'text-gray-400': !rlaSettings.isActive,
+                  }"
+                ></i>
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </aside>
+      <div class="flex-1 min-w-0">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  </div>
+</div>

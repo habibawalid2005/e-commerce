@@ -1,0 +1,314 @@
+<section class="py-10">
+  <div class="container max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 p-4">
+    <div>
+      <h1 class="text-4xl font-bold text-gray-700">
+        {{ 'register.welcome' | translate }} <span class="text-primary-600">FreshCart</span>
+      </h1>
+      <p class="text-xl mt-2 mb-4 font-medium text-gray-700">
+        {{ 'register.hero_subtitle' | translate }}
+      </p>
+      <ul class="*:flex *:items-start *:gap-4 space-y-6 my-8">
+        <li>
+          <div
+            class="icon size-12 text-lg bg-primary-200 text-primary-600 rounded-full flex justify-center items-center"
+          >
+            <i class="fa-solid fa-star"></i>
+          </div>
+          <div class="content">
+            <h2 class="text-lg font-semibold text-gray-700">
+              {{ 'register.features.quality_title' | translate }}
+            </h2>
+            <p class="text-gray-600 font-medium">
+              {{ 'register.features.quality_desc' | translate }}
+            </p>
+          </div>
+        </li>
+        <li>
+          <div
+            class="icon size-12 text-lg bg-primary-200 text-primary-600 rounded-full flex justify-center items-center"
+          >
+            <i class="fa-solid fa-truck-fast"></i>
+          </div>
+          <div class="content">
+            <h2 class="text-lg font-semibold text-gray-700">
+              {{ 'register.features.delivery_title' | translate }}
+            </h2>
+            <p class="text-gray-600 font-medium">
+              {{ 'register.features.delivery_desc' | translate }}
+            </p>
+          </div>
+        </li>
+        <li>
+          <div
+            class="icon size-12 text-lg bg-primary-200 text-primary-600 rounded-full flex justify-center items-center"
+          >
+            <i class="fa-solid fa-shield-halved"></i>
+          </div>
+          <div class="content">
+            <h2 class="text-lg font-semibold text-gray-700">
+              {{ 'register.features.secure_title' | translate }}
+            </h2>
+            <p class="text-gray-600 font-medium">
+              {{ 'register.features.secure_desc' | translate }}
+            </p>
+          </div>
+        </li>
+      </ul>
+      <div class="review bg-white shadow-sm p-4 rounded-md">
+        <div class="author flex items-center gap-4 mb-4">
+          <img alt="avatar" class="size-12 rounded-full" src="assets/review-author.webp" />
+          <div>
+            <h3 class="text-gray-700 font-medium">{{ 'register.testimonial.name' | translate }}</h3>
+            <div class="rating *:text-yellow-300">
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+            </div>
+          </div>
+        </div>
+        <blockquote>
+          <p class="italic text-gray-600 font-medium">
+            "{{ 'register.testimonial.quote' | translate }}"
+          </p>
+        </blockquote>
+      </div>
+    </div>
+
+    <div class="bg-white rounded-2xl shadow-lg px-6 py-10">
+      <h2 class="text-center text-3xl text-gray-700 font-semibold mb-2">
+        {{ 'register.form_title' | translate }}
+      </h2>
+      <p class="text-center text-gray-700 font-medium">
+        {{ 'register.form_subtitle' | translate }}
+      </p>
+      <div class="register-options flex gap-2 *:grow my-10">
+        <button
+          type="button"
+          class="cursor-pointer rounded transition duration-200 bg-transparent text-gray-900 border border-gray-300 hover:bg-gray-100 flex justify-center items-center py-2 px-4 font-semibold"
+        >
+          <i class="fa-brands fa-google text-red-600 me-2"></i>
+          <span>{{ 'register.google' | translate }}</span>
+        </button>
+        <button
+          type="button"
+          class="cursor-pointer rounded transition duration-200 bg-transparent text-gray-900 border border-gray-300 hover:bg-gray-100 flex justify-center items-center py-2 px-4 font-semibold"
+        >
+          <i class="fa-brands fa-facebook text-blue-600 me-2"></i>
+          <span>{{ 'register.facebook' | translate }}</span>
+        </button>
+      </div>
+      <div
+        class="divider relative w-full h-0.5 bg-gray-300/30 my-4 flex items-center before:content-[attr(data-content)] before:absolute before:top-1/2 before:left-1/2 before:-translate-1/2 before:bg-white before:px-4"
+        [attr.data-content]="'register.or' | translate"
+        aria-hidden="true"
+      >
+        <span class="sr-only">{{ 'register.or' | translate }}</span>
+      </div>
+      <form (ngSubmit)="register()" [formGroup]="registerForm" class="space-y-7">
+        <div class="flex flex-col gap-2">
+          <label for="name" class="text-gray-700 font-medium"
+            >{{ 'register.labels.name' | translate }}*</label
+          >
+          <input
+            formControlName="name"
+            id="name"
+            class="rounded-md px-3 py-2 border border-[#99A1AF66] focus:ring-0 focus:shadow-none focus:outline-0 focus:border-primary-600 transition placeholder:text-gray-700/50"
+            [placeholder]="'register.placeholders.name' | translate"
+            type="text"
+            name="name"
+          />
+
+          @let nameControl = registerForm.get('name');
+          @if (nameControl?.errors && nameControl?.touched) {
+            @if (nameControl?.getError('required')) {
+              <app-error-message-alert
+                [textMessage]="'register.errors.name_required' | translate"
+              ></app-error-message-alert>
+            }
+            @if (nameControl?.getError('minlength')) {
+              <app-error-message-alert
+                [textMessage]="'register.errors.name_short' | translate"
+              ></app-error-message-alert>
+            }
+            @if (nameControl?.getError('maxlength')) {
+              <app-error-message-alert
+                [textMessage]="'register.errors.name_long' | translate"
+              ></app-error-message-alert>
+            }
+          }
+        </div>
+
+        <div class="flex flex-col gap-2">
+          <label for="email" class="text-gray-700 font-medium"
+            >{{ 'register.labels.email' | translate }}*</label
+          >
+          <input
+            formControlName="email"
+            id="email"
+            class="rounded-md px-3 py-2 border border-[#99A1AF66] focus:ring-0 focus:shadow-none focus:outline-0 focus:border-primary-600 transition placeholder:text-gray-700/50"
+            [placeholder]="'register.placeholders.email' | translate"
+            autocomplete="email"
+            type="email"
+            name="email"
+          />
+
+          @let emailControl = registerForm.get('email');
+          @if (emailControl?.errors && emailControl?.touched) {
+            @if (emailControl?.getError('required')) {
+              <app-error-message-alert
+                [textMessage]="'register.errors.email_required' | translate"
+              ></app-error-message-alert>
+            }
+            @if (emailControl?.getError('email')) {
+              <app-error-message-alert
+                [textMessage]="'register.errors.email_invalid' | translate"
+              ></app-error-message-alert>
+            }
+          }
+          @if (errorMsg()) {
+            <app-error-message-alert [textMessage]="errorMsg()"></app-error-message-alert>
+          }
+        </div>
+
+        <div class="flex flex-col gap-2">
+          <label for="password" class="text-gray-700 font-medium"
+            >{{ 'register.labels.password' | translate }}*</label
+          >
+          <input
+            formControlName="password"
+            id="password"
+            class="rounded-md px-3 py-2 border border-[#99A1AF66] focus:ring-0 focus:shadow-none focus:outline-0 focus:border-primary-600 transition placeholder:text-gray-700/50"
+            [placeholder]="'register.placeholders.password' | translate"
+            autocomplete="new-password"
+            type="password"
+            name="password"
+          />
+
+          @let passwordControl = registerForm.get('password');
+          @if (passwordControl?.errors && passwordControl?.touched) {
+            @if (passwordControl?.getError('required')) {
+              <app-error-message-alert
+                [textMessage]="'register.errors.pass_required' | translate"
+              ></app-error-message-alert>
+            }
+            @if (passwordControl?.getError('pattern')) {
+              <app-error-message-alert
+                [textMessage]="'register.errors.pass_pattern' | translate"
+              ></app-error-message-alert>
+            }
+          }
+        </div>
+
+        <div class="flex flex-col gap-2">
+          <label for="rePassword" class="text-gray-700 font-medium"
+            >{{ 'register.labels.rePassword' | translate }}*</label
+          >
+          <input
+            formControlName="rePassword"
+            id="rePassword"
+            class="rounded-md px-3 py-2 border border-[#99A1AF66] focus:ring-0 focus:shadow-none focus:outline-0 focus:border-primary-600 transition placeholder:text-gray-700/50"
+            [placeholder]="'register.placeholders.rePassword' | translate"
+            autocomplete="new-password"
+            type="password"
+            name="rePassword"
+          />
+
+          @let rePasswordControl = registerForm.get('rePassword');
+          @if (rePasswordControl?.errors && rePasswordControl?.touched) {
+            @if (rePasswordControl?.getError('required')) {
+              <app-error-message-alert
+                [textMessage]="'register.errors.rePass_required' | translate"
+              ></app-error-message-alert>
+            }
+            @if (rePasswordControl?.getError('misMatch')) {
+              <app-error-message-alert
+                [textMessage]="'register.errors.pass_mismatch' | translate"
+              ></app-error-message-alert>
+            }
+          }
+        </div>
+
+        <div class="flex flex-col gap-2">
+          <label for="phone" class="text-gray-700 font-medium"
+            >{{ 'register.labels.phone' | translate }}*</label
+          >
+          <input
+            formControlName="phone"
+            id="phone"
+            class="rounded-md px-3 py-2 border border-[#99A1AF66] focus:ring-0 focus:shadow-none focus:outline-0 focus:border-primary-600 transition placeholder:text-gray-700/50"
+            placeholder="+1 234 567 8900"
+            autocomplete="tel"
+            type="tel"
+            name="phone"
+          />
+
+          @let phoneControl = registerForm.get('phone');
+          @if (phoneControl?.errors && phoneControl?.touched) {
+            @if (phoneControl?.getError('required')) {
+              <app-error-message-alert
+                [textMessage]="'register.errors.phone_required' | translate"
+              ></app-error-message-alert>
+            }
+            @if (phoneControl?.getError('pattern')) {
+              <app-error-message-alert
+                [textMessage]="'register.errors.phone_pattern' | translate"
+              ></app-error-message-alert>
+            }
+          }
+        </div>
+
+        <div>
+          <div class="flex items-center gap-2">
+            <input
+              formControlName="terms"
+              id="terms"
+              class="size-4 accent-primary-600 text-primary-600 focus:ring-primary-500"
+              type="checkbox"
+              name="terms"
+            />
+            <label for="terms" class="ms-2 text-gray-700 font-medium">
+              {{ 'register.terms_text' | translate }}
+              <a class="text-primary-600 hover:underline cursor-pointer">{{
+                'register.terms_link' | translate
+              }}</a>
+              {{ 'register.and' | translate }}
+              <a class="text-primary-600 hover:underline cursor-pointer">{{
+                'register.privacy_link' | translate
+              }}</a>
+              *
+            </label>
+          </div>
+          @let termsControl = registerForm.get('terms');
+          @if (termsControl?.errors && termsControl?.touched) {
+            <div class="mt-1">
+              <app-error-message-alert
+                [textMessage]="'register.errors.terms_required' | translate"
+              ></app-error-message-alert>
+            </div>
+          }
+        </div>
+
+        <button
+          [disabled]="registerForm.invalid || isCreateAccountLoading()"
+          type="submit"
+          class="btn bg-primary-600 text-white not-disabled:hover:bg-primary-700 rounded py-2 font-semibold cursor-pointer transition px-4 disabled:opacity-50 disabled:cursor-not-allowed w-full"
+        >
+          @if (isCreateAccountLoading()) {
+            <i class="fa-solid fa-spinner fa-spin me-2"></i>
+          } @else {
+            <i class="fa-solid fa-user-plus me-2"></i>
+          }
+          <span>{{ 'register.submit_btn' | translate }}</span>
+        </button>
+      </form>
+      <p class="border-t pt-10 text-gray-700 border-gray-300/30 my-4 text-center">
+        {{ 'register.already_have_account' | translate }}
+        <a class="text-primary-600 hover:underline font-medium" routerLink="/login">{{
+          'register.sign_in' | translate
+        }}</a>
+      </p>
+    </div>
+  </div>
+</section>
